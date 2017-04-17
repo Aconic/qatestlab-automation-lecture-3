@@ -12,14 +12,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Contains main script actions that may be used in scripts.
  */
-public class GeneralActions
-{
+public class GeneralActions {
     private WebDriver driver;
     private WebDriverWait wait;
 
 
-    public GeneralActions(WebDriver driver)
-    {
+    public GeneralActions(WebDriver driver) {
         this.driver = driver;
         wait = new WebDriverWait(driver, 30);
     }
@@ -30,27 +28,21 @@ public class GeneralActions
      * @param login
      * @param password
      */
-    public void login(String login, String password)
-    {
+    public void login(String login, String password) {
         // TODO implement logging in to Admin Panel
         driver.get(Properties.getBaseAdminUrl());
-        WebElement email = driver.findElement(By.id("email"));
-        WebElement passwd = driver.findElement(By.id("passwd"));
-        WebElement submit = driver.findElement(By.name("submitLogin"));
-
-        email.sendKeys(login);
-        passwd.sendKeys(password);
-        submit.click();
-    }
+        driver.findElement(By.id("email")).sendKeys(login);
+        driver.findElement(By.id("passwd")).sendKeys(password);
+        driver.findElement(By.name("submitLogin")).click();
+     }
 
     /**
      * Adds new category in Admin Panel.
      *
      * @param categoryName
      */
-    public void createCategory(String categoryName)
-    {
-        JavascriptExecutor jse = (JavascriptExecutor)driver;
+    public void createCategory(String categoryName) {
+        JavascriptExecutor jse = (JavascriptExecutor) driver;
         Actions builder = new Actions(driver);
 
         WebElement ctlgTab = driver.findElement(By.xpath("//li[@data-submenu='9']"));
@@ -73,10 +65,9 @@ public class GeneralActions
     /**
      * Waits until page loader disappears from the page
      */
-    public void waitForContentLoad()
-    {
+    public void waitForContentLoad() {
         // TODO implement generic method to wait until page content is loaded
-         wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ajax_running")));
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("ajax_running")));
 
     }
 
